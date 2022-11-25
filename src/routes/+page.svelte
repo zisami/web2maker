@@ -1,5 +1,16 @@
 <script>
-    import PaperCanvas from "$lib/paper/paper-canvas.svelte";
+	import ProductViewer from "../lib/product-viewer/product-viewer.svelte";
 </script>
-<PaperCanvas />
+
+<div id="wrapper-product-viewer">
+	<ProductViewer />
+</div>
+
+<style>
+	#wrapper-product-viewer {
+		height: 100vw;
+		width: 100vh;
+	}
+</style>
+
 
