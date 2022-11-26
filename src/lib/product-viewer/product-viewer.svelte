@@ -8,12 +8,15 @@
 	const scale = spring(1);
 	const loader = useLoader(SVGLoader, () => new SVGLoader());
 	let shapesFromPaths;
-	loader.load('/src/lib/assets/img/test.svg', (svg) => {
+	loader.load('/src/lib/assets/img/sheep.svg', (svg) => {
 		console.log('svg', svg);
 		shapesFromPaths = svg.paths.map((path) => SVGLoader.createShapes(path));
 		console.log(shapesFromPaths);
 	});
 	const colors =['hotpink', 'green']
+	let extrudedSvg
+	$: extrudedSvg?.center()
+	
 </script>
 
 <Canvas>
@@ -27,13 +30,13 @@
 	<T.DirectionalLight position={[3, -10, 10]} intensity={0.2} />
 
 	<!-- sheep -->
-	<T.Group scale={0.1}>
+	<T.Group scale={0.001*-1} position={[0.5, 2, 0]} >
 		{#if shapesFromPaths}
 			{#each shapesFromPaths as shapesArray, index}
 				{#each shapesArray as shape}
 					{console.log('shape',colors[index], shape)}
-					<T.Mesh castShadow let:ref>
-						<T.ExtrudeGeometry args={[shape, {depth:10}]}/>
+					<T.Mesh castShadow let:ref bind:ref={extrudedSvg}>
+						<T.ExtrudeGeometry args={[shape, {depth:10}] } />
 						<T.MeshStandardMaterial color={colors[index]}/>
 					</T.Mesh>
 						
