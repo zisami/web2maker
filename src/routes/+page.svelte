@@ -1,11 +1,11 @@
 <script>
 	import ProductViewer from "../lib/product-viewer/product-viewer.svelte";
-		import svgPath from '$lib/assets/img/test.svg';
+	import SvgTest from "../lib/assets/svg-test.svelte";
 </script>
 
 <div id="wrapper-product-viewer">
 	<ProductViewer />
-	<img src={svgPath} alt="sheep" />
+	<img src="/src/lib/assets/img/test.svg" alt="sheep" />
 </div>
 
 <style>

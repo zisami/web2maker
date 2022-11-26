@@ -1,7 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<script>
+    import { Canvas, InteractiveObject, OrbitControls, T,  useLoader } from '@threlte/core';
+	import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
+
+import svgPath from '$lib/assets/img/test.svg';
+const svgToGeometry = (svg) => {
+        let shapes = [];
+        const loader = new SVGLoader();
+        const data = loader.parse(svg);
+
+        const shapePaths = data.paths;
+        console.log(shapePaths, 'shapePaths');
+        shapePaths.forEach((shapePath) => {
+            const shape = SVGLoader.createShapes(shapePath);
+            console.log(shape, 'shape');
+            shapes = [...shapes, ...shape];
+        });
+        return shapes;
+    };
+const svg = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
    version="1.1"
    id="svg5"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -50,4 +72,12 @@
          inkscape:transform-center-x="-1.0345973"
          inkscape:transform-center-y="-0.6035334" />
    </g>
-</svg>
+</svg>`
+    </script>
+<T.Mesh>
+    <T.ExtrudeGeometry args={[svgToGeometry(svg), {depth:10}]}/>
+    <T.MeshStandardMaterial>
+        <T.Color args={['#ff0000']} attach="color" />
+    </T.MeshStandardMaterial>
+
+</T.Mesh>

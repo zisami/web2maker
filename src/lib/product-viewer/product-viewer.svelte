@@ -4,21 +4,17 @@
 	import { degToRad } from 'three/src/math/MathUtils';
 
 	import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
-	import svgPath from '$lib/assets/img/test.svg';
 	import { ExtrudeGeometry, Group, ShapeGeometry } from 'three';
 	const scale = spring(1);
-	console.log(svgPath);
 	const loader = useLoader(SVGLoader, () => new SVGLoader());
-	let shapes;
-	loader.load(svgPath, (svg) => {
+	let shapesFromPaths;
+	loader.load('/src/lib/assets/img/test.svg', (svg) => {
 		console.log('svg', svg);
-		shapes = svg.paths.map((path) => SVGLoader.createShapes(path));
-		console.log(shapes);
+		shapesFromPaths = svg.paths.map((path) => SVGLoader.createShapes(path));
+		console.log(shapesFromPaths);
 	});
+	const colors =['hotpink', 'green']
 </script>
-
-<!--   
--->
 
 <Canvas>
 	<T.PerspectiveCamera makeDefault position={[10, 10, 10]} fov={24}>
@@ -31,18 +27,16 @@
 	<T.DirectionalLight position={[3, -10, 10]} intensity={0.2} />
 
 	<!-- sheep -->
-	<T.Group scale={1}>
-		{#if shapes}
-			{#each shapes as shapesArray, index}
-				{#each shapesArray as shape, index}
-					{console.log('shape', shape)}
-						{#each shape.curves as curve}
-							<T.Mesh position.y={1 + index * 2} castShadow let:ref>
-								{console.log('curve', curve)}
-								<T.ExtrudeGeometry args={curve}/>
-								<T.MeshBasicMaterial color="hotpink" />
-							</T.Mesh>
-						{/each}
+	<T.Group scale={0.1}>
+		{#if shapesFromPaths}
+			{#each shapesFromPaths as shapesArray, index}
+				{#each shapesArray as shape}
+					{console.log('shape',colors[index], shape)}
+					<T.Mesh castShadow let:ref>
+						<T.ExtrudeGeometry args={[shape, {depth:10}]}/>
+						<T.MeshStandardMaterial color={colors[index]}/>
+					</T.Mesh>
+						
 					{/each}
 			{/each}
 		{/if}
