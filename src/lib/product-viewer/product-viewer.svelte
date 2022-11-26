@@ -4,22 +4,21 @@
 	import { degToRad } from 'three/src/math/MathUtils';
 
 	import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
-	import sheep from '$lib/assets/img/sheep.svg';
+	import sheep from '$lib/assets/img/test.svg';
 	import { ExtrudeGeometry, Group, ShapeGeometry } from 'three';
 	const scale = spring(1);
 	console.log(sheep);
-
 	const loader = useLoader(SVGLoader, () => new SVGLoader());
 	let shapes;
 	loader.load(sheep, (svg) => {
-		console.log(svg);
-		shapes = svg.paths.map((path) => path.toShapes(true));
+		console.log('svg', svg);
+		shapes = svg.paths.map((path) => SVGLoader.createShapes(path));
 		console.log(shapes);
 	});
 </script>
 
 <!--   
-<img src={sheep} alt="sheep" />
+	<img src={sheep} alt="sheep" />
 -->
 <Canvas>
 	<T.PerspectiveCamera makeDefault position={[10, 10, 10]} fov={24}>
@@ -33,23 +32,22 @@
 
 	<!-- sheep -->
 	<T.Group scale={1}>
-		<T.Mesh position.y={1} castShadow let:ref>
-			{#if shapes}
-				{#each shapes as shapesArray}
-					{#each shapesArray as shape, index}
-						{console.log(shape)}
-						<T.ExtrudeGeometry
-							args={shape}
-							depth={2}
-							bevelEnabled={false}
-							position={[0, 1 + index, 0]}
-						/>
+		{#if shapes}
+			{#each shapes as shapesArray, index}
+				{#each shapesArray as shape, index}
+					{console.log('shape', shape)}
+						{#each shape.curves as curve}
+							<T.Mesh position.y={1 + index * 2} castShadow let:ref>
+								{console.log('curve', curve)}
+								<T.ExtrudeGeometry args={curve}/>
+								<T.MeshBasicMaterial color="hotpink" />
+							</T.Mesh>
+						{/each}
 					{/each}
-				{/each}
-			{/if}
-			<T.MeshStandardMaterial color="hotpink" />
-		</T.Mesh>
+			{/each}
+		{/if}
 	</T.Group>
+
 	<!-- Floor -->
 	<T.Mesh receiveShadow rotation.x={degToRad(-90)}>
 		<T.CircleGeometry args={[3, 72]} />
