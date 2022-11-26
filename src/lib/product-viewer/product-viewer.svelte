@@ -1,16 +1,16 @@
 <script>
-	import { Canvas, InteractiveObject, OrbitControls, T, useLoader } from '@threlte/core';
+	import { Canvas, InteractiveObject, OrbitControls, T,  useLoader } from '@threlte/core';
 	import { spring } from 'svelte/motion';
 	import { degToRad } from 'three/src/math/MathUtils';
 
 	import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
-	import sheep from '$lib/assets/img/test.svg';
+	import svgPath from '$lib/assets/img/test.svg';
 	import { ExtrudeGeometry, Group, ShapeGeometry } from 'three';
 	const scale = spring(1);
-	console.log(sheep);
+	console.log(svgPath);
 	const loader = useLoader(SVGLoader, () => new SVGLoader());
 	let shapes;
-	loader.load(sheep, (svg) => {
+	loader.load(svgPath, (svg) => {
 		console.log('svg', svg);
 		shapes = svg.paths.map((path) => SVGLoader.createShapes(path));
 		console.log(shapes);
@@ -18,8 +18,8 @@
 </script>
 
 <!--   
-	<img src={sheep} alt="sheep" />
 -->
+
 <Canvas>
 	<T.PerspectiveCamera makeDefault position={[10, 10, 10]} fov={24}>
 		<OrbitControls maxPolarAngle={degToRad(80)} enableZoom={true} target={{ y: 1 }} />
