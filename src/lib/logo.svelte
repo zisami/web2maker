@@ -3,23 +3,13 @@
 </script>
 
 
-	<div id="logo-place">
-        <img src="{logoPath}" alt="">
+	<div class="container absolute px-8 pt-4 z-10">
+        <div class="wrapper ">
+            <img src="{logoPath}" alt="" class="relative z-10">
+            <div class="-mt-2 right-3 bg-purple-800 rounded-full p-2 text-white font-semibold absolute rotate-12 text-xs">v0.1</div>
+        </div>
     </div>
 
 <style>
-    img{
-        max-width: 100%;
-    }
-    #logo-place{
-		position: absolute;
-        width: 100vw;
-		left: 0;
-        right: 0;
-        margin: auto 0;
-        display: grid;
-        grid-gap: 4;
-        content: center;
-        padding: 2rem 1rem;
-	}
+
 </style>

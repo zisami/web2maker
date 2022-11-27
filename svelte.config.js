@@ -11,7 +11,9 @@ const config = {
 		adapter: adapter()
 	},
 	preprocess: seqPreprocessor([
-		preprocess(),
+		preprocess({
+			postcss: true
+		}),
 		preprocessThrelte({
 			extensions: {
 				'three/examples/jsm/controls/OrbitControls': [OrbitControls],

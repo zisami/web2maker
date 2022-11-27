@@ -3,19 +3,13 @@
 	import Logo from "../lib/logo.svelte";
 </script>
 
-<div id="wrapper-product-viewer">
 <Logo/>
+<div class="h-screen w-screen relative">
 	<ProductViewer />
 </div>
 
 <style>
-	#wrapper-product-viewer {
-		height: 100vh;
-		width: 100vw;
-		border: solid 1px black;
-		position: relative;
-	}
-	
+
 </style>
 
 
