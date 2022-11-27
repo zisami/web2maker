@@ -4,7 +4,7 @@
 </script>
 
 <Logo/>
-<div class="h-screen w-screen relative">
+<div class="h-screen w-screen  relative">
 	<ProductViewer />
 </div>
 
