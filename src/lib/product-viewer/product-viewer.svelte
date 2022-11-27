@@ -1,4 +1,6 @@
 <script>
+  import SceneSetup from './scene-setup.svelte';
+
 	import { Canvas, InteractiveObject, OrbitControls, T,  useLoader } from '@threlte/core';
 	import { spring } from 'svelte/motion';
 	import { degToRad } from 'three/src/math/MathUtils';
@@ -21,21 +23,7 @@
 </script>
 
 <Canvas>
-	<T.PerspectiveCamera makeDefault position={[8, 2, 8]}  fov={20}>
-		<OrbitControls 
-		minPolarAngle={degToRad(50)} 
-		maxPolarAngle={degToRad(80)} 
-		minAzimuthAngle={degToRad(-30)} 
-		maxAzimuthAngle={degToRad(90)} 
-		enableZoom={true} 
-		maxDistance={150} 
-		target={model.position}
-		enableDamping/>
-	</T.PerspectiveCamera>
-
-	<T.DirectionalLight castShadow position={[-1, 10, 10]} />
-
-	<T.AmbientLight intensity={0.2} />
+	<SceneSetup />
 
 	<Float speed={1}  >
 	<!-- sheep -->
