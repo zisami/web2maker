@@ -27,13 +27,13 @@
 	}
 </script>
 
+{#if shapesFromPaths}
 <Canvas>
 	<SceneSetup />
 
 	<Float speed={1}>
 		<!-- sheep -->
 		<T.Group scale={$scale * -1} position={model.position} rotation.y={degToRad(35)}>
-			{#if shapesFromPaths}
 				{#each shapesFromPaths as shapesArray, index}
 					{#each shapesArray as shape}
 						<T.Mesh castShadow let:ref>
@@ -48,19 +48,25 @@
 						</T.Mesh>
 					{/each}
 				{/each}
-			{/if}
-		</T.Group>
-	</Float>
-
-	<!-- Floor -->
-	<T.Mesh receiveShadow rotation.x={degToRad(-90)}>
-		<T.CircleGeometry args={[10, 72]} />
-		<T.MeshStandardMaterial color="darkgreen" />
-	</T.Mesh>
-
-	<!-- Sky -->
-	<T.Mesh receiveShadow rotation.z={degToRad(-90)}>
-		<T.SphereGeometry args={[10, 36, 18]} />
-		<T.MeshStandardMaterial color="#87ceeb" side={1} />
-	</T.Mesh>
-</Canvas>
+			</T.Group>
+		</Float>
+		
+		<!-- Floor -->
+		<T.Mesh receiveShadow rotation.x={degToRad(-90)}>
+			<T.CircleGeometry args={[10, 72]} />
+			<T.MeshStandardMaterial color="darkgreen" />
+		</T.Mesh>
+		
+		<!-- Sky -->
+		<T.Mesh receiveShadow rotation.z={degToRad(-90)}>
+			<T.SphereGeometry args={[10, 36, 18]} />
+			<T.MeshStandardMaterial color="#87ceeb" side={1} />
+		</T.Mesh>
+	</Canvas>
+	
+	{:else}
+	<div class="container grid place-content-center h-screen w-screen bg-orange-300 ">
+		<img src="/src/lib/assets/img/sheep.svg" alt="comic-sheep" class="w-8">
+		getting a sheep for you...
+	</div>
+{/if}
