@@ -38,6 +38,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"paper": "^0.12.17"
+		"paper": "^0.12.17",
+		"svelte-icons": "^2.1.0"
 	}
 }
