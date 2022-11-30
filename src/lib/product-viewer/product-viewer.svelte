@@ -9,11 +9,11 @@
 	import { Float } from '@threlte/extras';
 
 	import {state} from "$lib/stores/state.js"
-
+	import svgFilePath from '$lib/assets/img/sheep.svg'
 	const scale = spring(0.001);
 	const loader = useLoader(SVGLoader, () => new SVGLoader());
-	let shapesFromPaths;
-	loader.load('/src/lib/assets/img/sheep.svg', (svg) => {
+	let shapesFromPaths = false;
+	loader.load(svgFilePath, (svg) => {
 		shapesFromPaths = svg.paths.map((path) => SVGLoader.createShapes(path));
 	});
 	const colors = ['white', 'black'];
