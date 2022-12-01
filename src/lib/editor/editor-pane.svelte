@@ -3,7 +3,6 @@
 	import { state } from '$lib/stores/state.js';
 	import MdClose from 'svelte-icons/md/MdClose.svelte'
 
-
 	function toggleEditorPane() {
 		$state.hideEditorPane = !$state.hideEditorPane;
 	}

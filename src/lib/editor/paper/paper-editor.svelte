@@ -45,15 +45,10 @@
 	}
 </script>
 
-<div class="w-full h-fit ">
-	<canvas id="myCanvas" class="w-fit h-fit" />
-	<DoubleRangeSlider bind:start bind:end class="hidden"/>
-	<div class="labels">
-		<div class="label">{nice(start)}</div>
-		<div class="label">{nice(end)}</div>
-	</div>
+<div class="w-full h-full flex flex-col border-red-500 border">
+	<canvas id="myCanvas" class="bg-amber-300" />
 	<div id="tools">
-		<a href="#" onclick="app.tool1.activate(); return false;">Clouds</a>
+		<a href="#" onclick="app.tool1.activate(); return false;">Wool-Tool</a>
 	</div>
 </div>
 
