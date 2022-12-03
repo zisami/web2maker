@@ -1,8 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 	import paper from 'paper';
-    import {tools} from '$lib/editor/paper/paper-tools.js';
 	import DoubleRangeSlider from '$lib/editor/inputs/DoubleRangeSlider.svelte';
+	import PaperTools from './paper-tools.svelte';
 
 	let start;
 	let end;
@@ -10,9 +10,9 @@
 		if (!d && d !== 0) return '';
 		return d.toFixed(2);
 	};
-	
+
 	onMount(() => {
-        window.app = tools
+		// window.app = tools
 		console.log('the component has mounted');
 		var canvas = document.getElementById('myCanvas');
 		// Create an empty project and a view for the canvas:
@@ -21,7 +21,6 @@
 		//createPaperSheat();
 		paper.view.draw();
 	});
-	
 
 	function createBackground() {
 		const rectangle = new paper.Rectangle(new paper.Point(0, 0), paper.view.viewSize);
@@ -47,9 +46,8 @@
 
 <div class="w-full h-full flex flex-col border-red-500 border">
 	<canvas id="myCanvas" class="bg-amber-300" />
-	<div id="tools">
-		<a href="#" onclick="app.tool1.activate(); return false;">Wool-Tool</a>
-	</div>
+
+	<PaperTools />
 </div>
 
 <style>
