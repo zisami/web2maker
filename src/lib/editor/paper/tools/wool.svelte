@@ -23,10 +23,8 @@
 
 			startPoint = event.point;
 		};
-		tool.onMouseDrag = function (event) {
-			// Use the arcTo command to draw cloudy lines
-			//console.log(event.point);
 
+		tool.onMouseDrag = function (event) {
 			if (!path.segments[1]) {
 				flipArc = path.segments[0].point.x - event.point.x < 0;
 				console.log(
@@ -39,6 +37,7 @@
 			console.log(flipArc);
 			path.arcTo(event.point, flipArc);
 		};
+
 		tool.onMouseUp = function (event) {
 			path.arcTo(event.point, flipArc);
 			path.arcTo(startPoint, flipArc);
@@ -53,6 +52,7 @@
 			$sheep.svg = outline.exportSVG();
 			console.log($sheep.svg);
 		};
+        
         tool.activate();
 	});
 	const onActivate = () => {
