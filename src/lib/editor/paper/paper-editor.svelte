@@ -1,7 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
 	import paper from 'paper';
-	import DoubleRangeSlider from '$lib/editor/inputs/DoubleRangeSlider.svelte';
 	import PaperTools from './paper-tools.svelte';
 
 	onMount(() => {
