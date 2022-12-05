@@ -42,8 +42,9 @@
 		if ($sheep.svg) {
 			//console.log($sheep.svg);
 
-			//const svg = document.querySelector('.gap-4 > svg').outerHTML
-			shapesFromPaths = [loader.parse($sheep.svg.outerHTML).paths.map((path) => path.toShapes())];
+			const svg = $sheep.svg.outerHTML
+			console.log(svg);
+			shapesFromPaths = [loader.parse(svg)?.paths?.map((path) => path?.toShapes())];
 			console.log(shapesFromPaths);
 		}
 	}

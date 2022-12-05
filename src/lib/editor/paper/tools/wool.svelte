@@ -39,17 +39,20 @@
 		};
 
 		tool.onMouseUp = function (event) {
-			path.arcTo(event.point, flipArc);
-			path.arcTo(startPoint, flipArc);
-			path.closePath();
-			const bounds = new paper.Path.Rectangle(path.getBounds());
-			bounds.strokeColor = 'black';
-			bounds.strokeWidth = 2;
-			bounds.intersect(path);
-			const outline = paper.project.activeLayer.lastChild;
-			outline.fillColor = 'grey';
-			paper.project.activeLayer.children = [outline];
-			$sheep.svg = paper.project.exportSVG();
+			//mouse must be moved from the start point to close the path
+			if (event.point.x !== startPoint.x && event.point.y !== startPoint.y) {
+				path.arcTo(event.point, flipArc);
+				path.arcTo(startPoint, flipArc);
+				path.closePath();
+				const bounds = new paper.Path.Rectangle(path.getBounds());
+				bounds.strokeColor = 'black';
+				bounds.strokeWidth = 2;
+				bounds.intersect(path);
+				const outline = paper.project.activeLayer.lastChild;
+				outline.fillColor = 'grey';
+				paper.project.activeLayer.children = [outline];
+				$sheep.svg = paper.project.exportSVG();
+			}
 		};
         
         tool.activate();
