@@ -12,7 +12,7 @@
 	function toggleEditorPane() {
 		$state.hideEditorPane = !$state.hideEditorPane;
 	}
-	console.log(shape);
+	//console.log(shape);
 </script>
 
 <T.Mesh castShadow let:ref>

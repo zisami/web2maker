@@ -43,7 +43,7 @@
 			//console.log($sheep.svg);
 
 			const svg = $sheep.svg.outerHTML
-			console.log(svg);
+			//console.log(svg);
 			shapesFromPaths = [loader.parse(svg)?.paths?.map((path) => path?.toShapes())];
 			console.log(shapesFromPaths);
 		}
