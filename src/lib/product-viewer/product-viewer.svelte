@@ -1,11 +1,12 @@
 <script>
-  import MeshInteractive from './mesh-interactive.svelte';
-  import ShapesLooper from './shapes-looper.svelte';
+	import { onMount } from 'svelte';
+	import MeshInteractive from './mesh-interactive.svelte';
+	import ShapesLooper from './shapes-looper.svelte';
 
 	import WorldSetup from './world-setup.svelte';
 	import SceneSetup from './scene-setup.svelte';
-
-	import { Canvas, InteractiveObject,  T, useLoader } from '@threlte/core';
+	import { state3D } from '$lib/stores/state3D.js';
+	import { Canvas, InteractiveObject, T, useLoader } from '@threlte/core';
 	import { spring } from 'svelte/motion';
 	import { degToRad } from 'three/src/math/MathUtils';
 
@@ -16,6 +17,21 @@
 	import { sheep } from '$lib/stores/sheep.js';
 
 	import svgFilePath from '$lib/assets/img/sheep.svg';
+
+	onMount(() => {
+		if (!$state3D?.model) {
+			$state3D.model = {};
+		}
+		if (!$state3D?.model?.position) {
+			$state3D.model.position = [-0.75, 1.5, 0];
+		}
+		if (!$state3D?.model?.rotation) {
+			$state3D.model.rotation = [0, degToRad(-150), 0];
+		}
+		if (!$state3D?.model?.scale) {
+			$state3D.model.scale = 0.01;
+		}
+	});
 	const scale = spring(0.001);
 	const loader = useLoader(SVGLoader, () => new SVGLoader());
 	let serializer;
@@ -31,10 +47,6 @@
 
 	const colors = ['white', 'black'];
 
-	const model = {
-		position: [0.75, 1.5, 0]
-	};
-
 	function toggleEditorPane() {
 		$state.hideEditorPane = !$state.hideEditorPane;
 	}
@@ -42,7 +54,7 @@
 		if ($sheep.svg) {
 			//console.log($sheep.svg);
 
-			const svg = $sheep.svg.outerHTML
+			const svg = $sheep.svg.outerHTML;
 			//console.log(svg);
 			shapesFromPaths = [loader.parse(svg)?.paths?.map((path) => path?.toShapes())];
 			console.log(shapesFromPaths);
@@ -56,7 +68,11 @@
 
 		<Float speed={1}>
 			<!-- sheep -->
-			<T.Group scale={$scale * -1} position={model.position} rotation.y={degToRad(35)}>
+			<T.Group
+				scale={$state3D.model.scale  * -1}
+				position={$state3D.model.position}
+				rotation={$state3D.model.rotation}
+			>
 				<ShapesLooper shapes={shapesFromPaths} />
 			</T.Group>
 		</Float>

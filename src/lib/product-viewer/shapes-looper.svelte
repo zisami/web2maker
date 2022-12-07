@@ -10,6 +10,3 @@
 {:else }
     <MeshInteractive shape={shapes} />
 {/if}
-
-
-

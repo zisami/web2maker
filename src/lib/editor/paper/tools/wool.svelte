@@ -39,6 +39,7 @@
 		};
 
 		tool.onMouseUp = function (event) {
+			console.log(event);
 			//mouse must be moved from the start point to close the path
 			if (event.point.x !== startPoint.x && event.point.y !== startPoint.y) {
 				path.arcTo(event.point, flipArc);
